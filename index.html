@@ -140,10 +140,10 @@
             color: var(--accent-warn);
         }
 
-        /* زنجیره مانیتورینگ جریان سوخت */
+        /* جریان زنجیره سوخت */
         .supply-chain-flow {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
             gap: 15px;
             margin-bottom: 20px;
         }
@@ -154,6 +154,11 @@
             padding: 16px;
             border-radius: 8px;
             text-align: center;
+            transition: 0.3s;
+        }
+
+        .node-step:hover {
+            border-color: var(--accent-primary);
         }
 
         .node-step i {
@@ -163,17 +168,18 @@
         }
 
         .node-step .val {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             font-weight: bold;
             color: #fff;
         }
 
         .node-step .sub {
-            font-size: 0.8rem;
+            font-size: 0.82rem;
             color: var(--text-muted);
+            margin-top: 4px;
         }
 
-        /* داشبورد و کنترل‌ها */
+        /* داشبورد چند ستونه */
         .grid-dashboard {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -218,16 +224,17 @@
             color: var(--text-muted);
         }
 
-        select, input {
+        select, input, textarea {
             background: #0f172a;
             border: 1px solid var(--border-color);
             color: var(--text-main);
             padding: 9px 12px;
             border-radius: 6px;
             outline: none;
+            width: 100%;
         }
 
-        select:focus, input:focus {
+        select:focus, input:focus, textarea:focus {
             border-color: var(--accent-primary);
         }
 
@@ -244,6 +251,7 @@
             justify-content: center;
             align-items: center;
             gap: 8px;
+            width: 100%;
         }
 
         .btn-exec:hover {
@@ -254,13 +262,22 @@
         .telemetry-row {
             display: flex;
             justify-content: space-between;
-            padding: 9px 0;
+            padding: 10px 0;
             border-bottom: 1px dashed #334155;
             font-size: 0.88rem;
         }
 
         .telemetry-row:last-child {
             border-bottom: none;
+        }
+
+        /* بخش امضا و تأییدیه مهندسی */
+        .approval-section {
+            background: #0f172a;
+            border: 1px solid #334155;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
         }
 
         footer {
@@ -287,44 +304,7 @@
 <body>
 
 <div class="container">
-    <!-- هدر با ۳ خط عنوان دقیق درخواستی -->
-    <header>
-        <div class="header-content">
-            <div class="title-group">
-                <div class="title-line-1">
-                    <i class="fa-solid fa-gas-pump"></i>
-                    <span>سامانه جامع هوش مصنوعی مانیتورینگ و پیگیری زنجیره سوخت کشور (پالایشگاه تا باک مصرف‌کننده)</span>
-                </div>
-                <div class="title-line-2">
-                    <span>پنل پیگیری سوخت از منبع پخش تا مصرف</span>
-                </div>
-                <div class="title-line-3">
-                    <span>حسین لعلیان؛</span>
-                    <span class="badge-rank">رتبه ۳۲ کنکور دکتری</span>
-                </div>
-            </div>
-            <div class="status-badge">
-                <span class="status-dot"></span>
-                <span>HIL / Simulink Engine: Online</span>
-            border-radius: 12px;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            line-height: 1.85;
-        }
-
-        .footer-email {
-            color: var(--accent-glow);
-            text-decoration: none;
-            font-weight: bold;
-            font-family: monospace;
-            font-size: 1.05rem;
-        }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <!-- هدر با ۳ خط عنوان دقیق درخواستی -->
+    <!-- هدر ۳ خطی استاندارد مهندسی -->
     <header>
         <div class="header-content">
             <div class="title-group">
@@ -347,30 +327,52 @@
         </div>
     </header>
 
-    <!-- بیانیه حقوقی و مهندسی -->
+    <!-- بیانیه مهندسی و حفظ مالکیت فکری -->
     <div class="disclaimer-box">
         <i class="fa-solid fa-shield-halved" style="color: var(--accent-warn); margin-left: 5px;"></i>
         <strong>بیانیه حقوقی و یادداشت مهندسی:</strong>
-        برای ممانعت از کپی‌برداری، دمویی</i>
-            <div class="val" id="station_deliver">۱۰۸,۱۵۰,۰۰۰</div>
-            <div class="sub">تحویل به جایگاه‌های عرضه (لیتر)</div>
+        برای ممانعت از کپی‌برداری، دمویی از یک پروژه و ایده صنعتی بسیار بزرگ‌تر در مقیاس کشوری شبیه‌سازی شده است. این نسخه قابلیت ارتقا و بارگذاری روی لبه‌های محاسباتی صنعتی (Edge Devices)، سخت‌افزار در حلقه (HIL) و پیاده‌سازی بلادرنگ را دارا می‌باشد.
+    </div>
+
+    <!-- زنجیره جریان انتقال سوخت -->
+    <div class="supply-chain-flow">
+        <div class="node-step">
+            <i class="fa-solid fa-industry"></i>
+            <div class="val" id="refinery_out">۱۱۰,۵۰۰,۰۰۰</div>
+            <div class="sub">تولید پالایشگاه (لیتر/روز)</div>
+        </div>
+        <div class="node-step">
+            <i class="fa-solid fa-arrows-split-up-and-left"></i>
+            <div class="val" id="pipeline_flow">۸۵,۲۰۰,۰۰۰</div>
+            <div class="sub">تزریق به شبکه خطوط لوله</div>
+        </div>
+        <div class="node-step">
+            <i class="fa-solid fa-truck-droplet"></i>
+            <div class="val" id="tanker_load">۲۲,۸۰۰,۰۰۰</div>
+            <div class="sub">ناوگان نفتکش جاده‌ای</div>
+        </div>
+        <div class="node-step">
+            <i class="fa-solid fa-warehouse"></i>
+            <div class="val" id="depot_store">۱۰۸,۱۵۰,۰۰۰</div>
+            <div class="sub">تخلیه انبار و مخازن استراتژیک</div>
         </div>
         <div class="node-step">
             <i class="fa-solid fa-car"></i>
             <div class="val" id="consumer_burn">۱۰۶,۹۰۰,۰۰۰</div>
-            <div class="sub">مصرف نهایی در باک خودروها (لیتر)</div>
+            <div class="sub">مصرف نهایی در باک خودروها</div>
         </div>
     </div>
 
-    <!-- ماژول‌های تحلیلی و شبیه‌ساز -->
+    <!-- ماژول‌های تحلیل، پارامترها و تله‌متری ANFIS -->
     <div class="grid-dashboard">
+        <!-- پنل تنظیمات الگوریتم و ورودی -->
         <div class="card">
             <div class="card-header">
-                <span><i class="fa-solid fa-microchip"></i> پیکربندی الگوریتم‌های فراابتکاری و فازی</span>
+                <span><i class="fa-solid fa-sliders"></i> پارامترهای پایشی و الگوریتم‌های هوش مصنوعی</span>
             </div>
             <div class="control-panel">
                 <div class="input-group">
-                    <label>الگوریتم فراابتکاری تراز و بهینه‌سازی توزیع:</label>
+                    <label>الگوریتم فراابتکاری بهینه‌سازی مسیر و دیسپچینگ:</label>
                     <select id="metaheuristic_algo">
                         <option value="pso">الگوریتم ازدحام ذرات (Particle Swarm Optimization - PSO)</option>
                         <option value="ga">الگوریتم ژنتیک تطبیقی چندهدفه (NSGA-II)</option>
@@ -379,16 +381,20 @@
                     </select>
                 </div>
                 <div class="input-group">
-                    <label>ماژول مدل‌سازی ANFIS و سخت‌افزار در حلقه (HIL / Simulink):</label>
+                    <label>مدل استنتاج عصبی-فازی و هسته شبیه‌سازی دینامیک:</label>
                     <select id="anfis_model">
-                        <option value="anfis_sugeno">شبکه عصبی فازی تطبیقی (ANFIS - Sugeno Engine)</option>
+                        <option value="anfis_sugeno">سیستم استنتاج تطبیقی عصبی-فازی (ANFIS - Sugeno Engine)</option>
                         <option value="simulink_hil">مدل دینامیک سیستم در محیط Simulink با لایه HIL</option>
-                        <option value="kalman_filter">فیلتر کالمن موازنه جرم و ردیابی افت فشار خط</option>
+                        <option value="kalman">فیلتر کالمن موازنه جرم و ردیابی افت فشار خط</option>
                     </select>
                 </div>
                 <div class="input-group">
-                    <label>نرخ تصحیح دما و چگالی هیدرومتری (API Gravity):</label>
+                    <label>تصحیح چگالی هیدرومتری در دمای پایه ۱۵ درجه (API Gravity):</label>
                     <input type="number" id="api_gravity" value="0.745" step="0.001">
+                </div>
+                <div class="input-group">
+                    <label>آستانه هشدار انحراف تراز حجمی (Lit/Hour):</label>
+                    <input type="number" id="threshold_val" value="1200" step="50">
                 </div>
                 <button class="btn-exec" onclick="runFuelOptimization()">
                     <i class="fa-solid fa-bolt"></i> اجرای تحلیل تراز و ردیابی زنجیره سوخت
@@ -396,17 +402,18 @@
             </div>
         </div>
 
+        <!-- تله‌متری موازنه و پایش ANFIS -->
         <div class="card">
             <div class="card-header">
-                <span><i class="fa-solid fa-chart-line"></i> نتایج مانیتورینگ تراز فیزیکی و افت خطوط</span>
+                <span><i class="fa-solid fa-chart-line"></i> تله‌متری موازنه جرم و سلامت زنجیره</span>
             </div>
             <div id="output-telemetry">
                 <div class="telemetry-row">
                     <span>خطای موازنه تراز فیزیکی (Mass-Balance Error):</span>
-                    <strong style="color: var(--accent-success);" id="mass_error">۰.۱۸٪ (بازه مجاز)</strong>
+                    <strong style="color: var(--accent-success);" id="mass_error">۰.۱۸٪ (محدوده مجاز)</strong>
                 </div>
                 <div class="telemetry-row">
-                    <span>تخمین کسری مشکوک / انحراف از زنجیره:</span>
+                    <span>تخمین کسری مشکوک / انحراف مسیر:</span>
                     <strong style="color: var(--accent-danger);" id="fuel_leakage">۱,۲۵۰,۰۰۰ لیتر</strong>
                 </div>
                 <div class="telemetry-row">
@@ -414,33 +421,45 @@
                     <strong style="color: var(--accent-glow);" id="fitness_score">۹۹.۴۲٪</strong>
                 </div>
                 <div class="telemetry-row">
-                    <span>تاخیر شبیه‌سازی لایه سخت‌افزاری HIL:</span>
-                    <strong style="color: var(--text-main);" id="hil_latency">۲.۴ میلی‌ثانیه</strong>
+                    <span>پایداری سیستم استنتاج غیرخطی ANFIS:</span>
+                    <strong style="color: var(--accent-success);" id="anfis_stability">۹۳.۱٪ (پایدار)</strong>
                 </div>
                 <div class="telemetry-row">
-                    <span>دقت مدل‌سازی استنتاجی ANFIS:</span>
-                    <strong style="color: #38bdf8;" id="anfis_acc">۹۸.۸۷٪</strong>
+                    <span>تاخیر شبیه‌سازی لایه سخت‌افزاری HIL:</span>
+                    <strong style="color: #cbd5e1;" id="hil_latency">۲.۴ میلی‌ثانیه</strong>
+                </div>
+            </div>
+
+            <!-- بخش تأییدیه مهندسی و ثبت لاگ -->
+            <div class="approval-section">
+                <label style="color: var(--accent-glow); font-weight: bold; margin-bottom: 6px; display: block;">
+                    <i class="fa-solid fa-user-check"></i> یادداشت و تأییدیه ناظر زنجیره:
+                </label>
+                <input type="text" placeholder="ثبت شناسه پایش / گزارش شیفت مهندسی..." style="margin-bottom: 8px;">
+                <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted);">
+                    <span>وضعیت تأیید: <span style="color: var(--accent-success);">تأیید خودکار موتور فازی</span></span>
+                    <span>زمان پاسخ: بلادرنگ (Real-Time)</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- نمودار تحلیلی مقایسه جریان سوخت -->
+    <!-- نمودار مانیتورینگ مقایسه‌ای و تراز حجمی -->
     <div class="card" style="margin-bottom: 20px;">
         <div class="card-header">
-            <span><i class="fa-solid fa-chart-pie"></i> مانیتورینگ تراز حجمی از منبع پالایشگاهی تا باک مصرف‌کننده</span>
+            <span><i class="fa-solid fa-chart-column"></i> مانیتورینگ تراز حجمی جریان سوخت (پالایشگاه تا باک مصرف‌کننده)</span>
         </div>
         <div style="height: 320px; width: 100%;">
             <canvas id="fuelChart"></canvas>
         </div>
     </div>
 
-    <!-- فوتر با درج کامل سه خط عنوان و ایمیل تماس -->
+    <!-- فوتر با درج کامل ۳ خط عنوان و مشخصات ارتباطی -->
     <footer>
         <p><strong>سامانه جامع هوش مصنوعی مانیتورینگ و پیگیری زنجیره سوخت کشور (پالایشگاه تا باک مصرف‌کننده)</strong></p>
         <p>پنل پیگیری سوخت از منبع پخش تا مصرف | حسین لعلیان؛ رتبه ۳۲ کنکور دکتری</p>
         <p style="margin-top: 10px;">
-            جهت سفارش و تولید صنعتی متصل به لبه‌های سخت‌افزاری واقعی (Edge Devices):
+            جهت سفارش، توسعه اختصاصی و اتصال به لبه‌های سخت‌افزاری واقعی (Industrial Edge / HIL):
             <br>
             <a class="footer-email" href="mailto:ai.algorithms.ballistics@gmail.com">ai.algorithms.ballistics@gmail.com</a>
         </p>
@@ -452,7 +471,7 @@
     let fuelChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['تولید پالایشگاه', 'توزیع خطوط لوله', 'تخلیه انبارها', 'تحویل جایگاه‌ها', 'مصرف باک'],
+            labels: ['تولید پالایشگاه', 'انتقال خط لوله', 'ناوگان نفتکش', 'تخلیه انبارها', 'مصرف باک'],
             datasets: [{
                 label: 'حجم سوخت بر حسب هزار لیتر (kL)',
                 data: [110500, 85200, 22800, 108150, 106900],
@@ -504,6 +523,7 @@
         let errorRate = ((Math.random() * (0.30 - 0.12)) + 0.12).toFixed(2);
         let fitness = ((Math.random() * (99.9 - 98.8)) + 98.8).toFixed(2);
         let hilLatency = ((Math.random() * (3.1 - 1.6)) + 1.6).toFixed(1);
+        let anfisStab = ((Math.random() * (95.0 - 92.5)) + 92.5).toFixed(1);
 
         baseLeakage = Math.floor(baseLeakage * (api / 0.745));
 
@@ -511,6 +531,7 @@
         document.getElementById('mass_error').innerText = errorRate + '٪ (تلورانس استاندارد)';
         document.getElementById('fitness_score').innerText = fitness + '٪ (' + algo.toUpperCase() + ')';
         document.getElementById('hil_latency').innerText = hilLatency + ' میلی‌ثانیه';
+        document.getElementById('anfis_stability').innerText = anfisStab + '٪ (پایدار)';
         
         fuelChart.data.datasets[0].data[3] = 108150 - Math.floor(Math.random() * 400);
         fuelChart.update();
