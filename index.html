@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>پنل پیگیری سوخت از منبع پخش تا مصرف | حسین لعلیان؛ رتبه ۳۲ کنکور دکتری</title>
+    <title>سامانه جامع هوش مصنوعی مانیتورینگ و پیگیری زنجیره سوخت کشور (پالایشگاه تا باک مصرف‌کننده) | پنل پیگیری سوخت از منبع پخش تا مصرف | حسین لعلیان؛ رتبه ۳۲ کنکور دکتری</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -40,13 +40,13 @@
             margin: 0 auto;
         }
 
-        /* هدر سیستم */
+        /* هدر جامع اختصاصی با ۳ خط عنوان مهندسی */
         header {
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             border: 1px solid var(--border-color);
             border-top: 4px solid var(--accent-primary);
             border-radius: 12px;
-            padding: 20px;
+            padding: 22px;
             margin-bottom: 20px;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
         }
@@ -59,12 +59,36 @@
             gap: 15px;
         }
 
-        h1 {
-            font-size: 1.4rem;
+        .title-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .title-line-1 {
+            font-size: 1.25rem;
             color: var(--accent-glow);
+            font-weight: 800;
             display: flex;
             align-items: center;
             gap: 10px;
+        }
+
+        .title-line-2 {
+            font-size: 1.1rem;
+            color: #e2e8f0;
+            font-weight: 700;
+            padding-right: 32px;
+        }
+
+        .title-line-3 {
+            font-size: 1.05rem;
+            color: #cbd5e1;
+            padding-right: 32px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
         }
 
         .badge-rank {
@@ -72,16 +96,31 @@
             color: #000;
             font-weight: 800;
             font-size: 0.85rem;
-            padding: 4px 12px;
+            padding: 3px 10px;
             border-radius: 20px;
             display: inline-block;
             box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
         }
 
-        .badge-engineer {
-            color: #e2e8f0;
-            font-size: 1.05rem;
-            margin-top: 8px;
+        .status-badge {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--accent-success);
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: #a7f3d0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            height: 10px;
+            width: 10px;
+            background-color: var(--accent-success);
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 8px var(--accent-success);
         }
 
         /* بیانیه حقوقی و مهندسی */
@@ -90,18 +129,18 @@
             border: 1px solid #475569;
             border-right: 5px solid var(--accent-warn);
             border-radius: 8px;
-            padding: 15px;
+            padding: 16px;
             margin-bottom: 20px;
-            font-size: 0.9rem;
+            font-size: 0.92rem;
             color: #cbd5e1;
-            line-height: 1.8;
+            line-height: 1.85;
         }
 
         .disclaimer-box strong {
             color: var(--accent-warn);
         }
 
-        /* زنجیره جریان انتقال سوخت */
+        /* زنجیره مانیتورینگ جریان سوخت */
         .supply-chain-flow {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -112,10 +151,9 @@
         .node-step {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            padding: 15px;
+            padding: 16px;
             border-radius: 8px;
             text-align: center;
-            position: relative;
         }
 
         .node-step i {
@@ -135,7 +173,7 @@
             color: var(--text-muted);
         }
 
-        /* شبکه کارت‌ها */
+        /* داشبورد و کنترل‌ها */
         .grid-dashboard {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -163,7 +201,6 @@
             font-weight: bold;
         }
 
-        /* استایل دکمه‌ها و فرم‌ها */
         .control-panel {
             display: flex;
             flex-direction: column;
@@ -214,7 +251,6 @@
             box-shadow: 0 0 15px rgba(2, 132, 199, 0.4);
         }
 
-        /* بخش خروجی محاسبات */
         .telemetry-row {
             display: flex;
             justify-content: space-between;
@@ -227,26 +263,16 @@
             border-bottom: none;
         }
 
-        .status-dot {
-            height: 10px;
-            width: 10px;
-            background-color: var(--accent-success);
-            border-radius: 50%;
-            display: inline-block;
-            margin-left: 5px;
-            box-shadow: 0 0 8px var(--accent-success);
-        }
-
         footer {
             margin-top: 30px;
             text-align: center;
-            padding: 20px;
+            padding: 22px;
             background: var(--bg-surface);
             border: 1px solid var(--border-color);
             border-radius: 12px;
             font-size: 0.9rem;
             color: var(--text-muted);
-            line-height: 1.8;
+            line-height: 1.85;
         }
 
         .footer-email {
@@ -261,80 +287,103 @@
 <body>
 
 <div class="container">
-    <!-- هدر سامانه -->
+    <!-- هدر با ۳ خط عنوان دقیق درخواستی -->
     <header>
         <div class="header-content">
-            <div>
-                <h1><i class="fa-solid fa-gas-pump"></i> پنل پیگیری سوخت از منبع پخش تا مصرف</h1>
-                <div class="badge-engineer">
-                    <strong>حسین لعلیان</strong>؛ <span class="badge-rank">رتبه ۳۲ کنکور دکتری</span>
+            <div class="title-group">
+                <div class="title-line-1">
+                    <i class="fa-solid fa-gas-pump"></i>
+                    <span>سامانه جامع هوش مصنوعی مانیتورینگ و پیگیری زنجیره سوخت کشور (پالایشگاه تا باک مصرف‌کننده)</span>
+                </div>
+                <div class="title-line-2">
+                    <span>پنل پیگیری سوخت از منبع پخش تا مصرف</span>
+                </div>
+                <div class="title-line-3">
+                    <span>حسین لعلیان؛</span>
+                    <span class="badge-rank">رتبه ۳۲ کنکور دکتری</span>
                 </div>
             </div>
-            <div>
-                <span class="status-dot"></span> <span style="font-size: 0.85rem; color: #cbd5e1;">سیستم شبیه‌سازی بلادرنگ (HIL / Simulink Active)</span>
+            <div class="status-badge">
+                <span class="status-dot"></span>
+                <span>HIL / Simulink Engine: Online</span>
+            border-radius: 12px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.85;
+        }
+
+        .footer-email {
+            color: var(--accent-glow);
+            text-decoration: none;
+            font-weight: bold;
+            font-family: monospace;
+            font-size: 1.05rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- هدر با ۳ خط عنوان دقیق درخواستی -->
+    <header>
+        <div class="header-content">
+            <div class="title-group">
+                <div class="title-line-1">
+                    <i class="fa-solid fa-gas-pump"></i>
+                    <span>سامانه جامع هوش مصنوعی مانیتورینگ و پیگیری زنجیره سوخت کشور (پالایشگاه تا باک مصرف‌کننده)</span>
+                </div>
+                <div class="title-line-2">
+                    <span>پنل پیگیری سوخت از منبع پخش تا مصرف</span>
+                </div>
+                <div class="title-line-3">
+                    <span>حسین لعلیان؛</span>
+                    <span class="badge-rank">رتبه ۳۲ کنکور دکتری</span>
+                </div>
+            </div>
+            <div class="status-badge">
+                <span class="status-dot"></span>
+                <span>HIL / Simulink Engine: Online</span>
             </div>
         </div>
     </header>
 
-    <!-- هشدار حقوقی و مهندسی -->
+    <!-- بیانیه حقوقی و مهندسی -->
     <div class="disclaimer-box">
         <i class="fa-solid fa-shield-halved" style="color: var(--accent-warn); margin-left: 5px;"></i>
-        <strong>بیانیه حقوقی و مهندسی:</strong>
-        برای ممانعت از کپی‌برداری، دمویی از این پنل با مقادیر ناچیز ارائه شده است! اما در صورت سفارش، طوری این پنل تولید می‌شود که با اتصال به لبه‌های واقعی (Real-Time Edge)، سنسورهای دبی‌سنجی، سامانه هوشمند ناوگان و موازنه تراز پالایشگاهی، پاسخ بهینه و دقیق را بدهد.
-    </div>
-
-    <!-- زنجیره جریان انتقال سوخت -->
-    <div class="supply-chain-flow">
-        <div class="node-step">
-            <i class="fa-solid fa-industry"></i>
-            <div class="val" id="refinery_out">۱۱۰,۵۰۰,۰۰۰</div>
-            <div class="sub">منبع پخش / پالایشگاه (لیتر)</div>
-        </div>
-        <div class="node-step">
-            <i class="fa-solid fa-route"></i>
-            <div class="val" id="pipeline_trans">۸۵,۲۰۰,۰۰۰</div>
-            <div class="sub">انتقال لوله‌ای و خطوط توزیع (لیتر)</div>
-        </div>
-        <div class="node-step">
-            <i class="fa-solid fa-warehouse"></i>
-            <div class="val" id="depot_storage">۲۲,۸۰۰,۰۰۰</div>
-            <div class="sub">انبارهای سوخت منطقه‌ای (لیتر)</div>
-        </div>
-        <div class="node-step">
-            <i class="fa-solid fa-truck-moving"></i>
+        <strong>بیانیه حقوقی و یادداشت مهندسی:</strong>
+        برای ممانعت از کپی‌برداری، دمویی</i>
             <div class="val" id="station_deliver">۱۰۸,۱۵۰,۰۰۰</div>
-            <div class="sub">تحویل جایگاه‌های عرضه (لیتر)</div>
+            <div class="sub">تحویل به جایگاه‌های عرضه (لیتر)</div>
         </div>
         <div class="node-step">
             <i class="fa-solid fa-car"></i>
             <div class="val" id="consumer_burn">۱۰۶,۹۰۰,۰۰۰</div>
-            <div class="sub">مصرف باک و ناوگان نهایی (لیتر)</div>
+            <div class="sub">مصرف نهایی در باک خودروها (لیتر)</div>
         </div>
     </div>
 
-    <!-- بدنه محاسباتی و داشبوردها -->
+    <!-- ماژول‌های تحلیلی و شبیه‌ساز -->
     <div class="grid-dashboard">
-        <!-- ماژول کنترلی و الگوریتم‌ها -->
         <div class="card">
             <div class="card-header">
-                <span><i class="fa-solid fa-microchip"></i> پیکربندی مدل هوشمند محاسباتی</span>
+                <span><i class="fa-solid fa-microchip"></i> پیکربندی الگوریتم‌های فراابتکاری و فازی</span>
             </div>
             <div class="control-panel">
                 <div class="input-group">
-                    <label>الگوریتم‌های فراابتکاری بهینه‌سازی زنجیره توزیع:</label>
+                    <label>الگوریتم فراابتکاری تراز و بهینه‌سازی توزیع:</label>
                     <select id="metaheuristic_algo">
                         <option value="pso">الگوریتم ازدحام ذرات (Particle Swarm Optimization - PSO)</option>
                         <option value="ga">الگوریتم ژنتیک تطبیقی چندهدفه (NSGA-II)</option>
                         <option value="gwo">الگوریتم گرگ خاکستری (Grey Wolf Optimizer - GWO)</option>
-                        <option value="aco">الگوریتم کلونی مورچگان برای مسیریابی نفتکش‌ها (ACO)</option>
+                        <option value="aco">الگوریتم کلونی مورچگان برای ناوگان نفتکش (ACO)</option>
                     </select>
                 </div>
                 <div class="input-group">
-                    <label>ماژول تحلیل هوشمند ANFIS و مدل‌سازی Simulink / HIL:</label>
+                    <label>ماژول مدل‌سازی ANFIS و سخت‌افزار در حلقه (HIL / Simulink):</label>
                     <select id="anfis_model">
                         <option value="anfis_sugeno">شبکه عصبی فازی تطبیقی (ANFIS - Sugeno Engine)</option>
-                        <option value="simulink_hil">مدل شبیه‌سازی دینامیکی Simulink با اتصال HIL</option>
-                        <option value="kalman_filter">فیلتر کالمن موازنه جرم و تشخیص افت خط (EKF Mass-Balance)</option>
+                        <option value="simulink_hil">مدل دینامیک سیستم در محیط Simulink با لایه HIL</option>
+                        <option value="kalman_filter">فیلتر کالمن موازنه جرم و ردیابی افت فشار خط</option>
                     </select>
                 </div>
                 <div class="input-group">
@@ -347,18 +396,17 @@
             </div>
         </div>
 
-        <!-- خروجی مانیتورینگ بلادرنگ -->
         <div class="card">
             <div class="card-header">
-                <span><i class="fa-solid fa-chart-line"></i> نتایج ارزیابی هوشمند و موازنه تراز سوخت</span>
+                <span><i class="fa-solid fa-chart-line"></i> نتایج مانیتورینگ تراز فیزیکی و افت خطوط</span>
             </div>
             <div id="output-telemetry">
                 <div class="telemetry-row">
-                    <span>موازنه تراز فیزیکی (Mass-Balance Error):</span>
-                    <strong style="color: var(--accent-success);" id="mass_error">۰.۱۸٪ (نرمال)</strong>
+                    <span>خطای موازنه تراز فیزیکی (Mass-Balance Error):</span>
+                    <strong style="color: var(--accent-success);" id="mass_error">۰.۱۸٪ (بازه مجاز)</strong>
                 </div>
                 <div class="telemetry-row">
-                    <span>تخمین کسری مشکوک / انحراف از مسیر:</span>
+                    <span>تخمین کسری مشکوک / انحراف از زنجیره:</span>
                     <strong style="color: var(--accent-danger);" id="fuel_leakage">۱,۲۵۰,۰۰۰ لیتر</strong>
                 </div>
                 <div class="telemetry-row">
@@ -377,21 +425,22 @@
         </div>
     </div>
 
-    <!-- نمودار تحلیلی زنجیره توزیع -->
+    <!-- نمودار تحلیلی مقایسه جریان سوخت -->
     <div class="card" style="margin-bottom: 20px;">
         <div class="card-header">
-            <span><i class="fa-solid fa-chart-pie"></i> تحلیل گام‌به‌گام موازنه سوخت از منبع تا باک</span>
+            <span><i class="fa-solid fa-chart-pie"></i> مانیتورینگ تراز حجمی از منبع پالایشگاهی تا باک مصرف‌کننده</span>
         </div>
         <div style="height: 320px; width: 100%;">
             <canvas id="fuelChart"></canvas>
         </div>
     </div>
 
-    <!-- فوتر و اطلاعات تماس -->
+    <!-- فوتر با درج کامل سه خط عنوان و ایمیل تماس -->
     <footer>
+        <p><strong>سامانه جامع هوش مصنوعی مانیتورینگ و پیگیری زنجیره سوخت کشور (پالایشگاه تا باک مصرف‌کننده)</strong></p>
         <p>پنل پیگیری سوخت از منبع پخش تا مصرف | حسین لعلیان؛ رتبه ۳۲ کنکور دکتری</p>
-        <p style="margin-top: 8px;">
-            جهت سفارش و استقرار صنعتی با اتصال به لبه‌های پردازشی واقعی (Edge Computing):
+        <p style="margin-top: 10px;">
+            جهت سفارش و تولید صنعتی متصل به لبه‌های سخت‌افزاری واقعی (Edge Devices):
             <br>
             <a class="footer-email" href="mailto:ai.algorithms.ballistics@gmail.com">ai.algorithms.ballistics@gmail.com</a>
         </p>
@@ -399,12 +448,11 @@
 </div>
 
 <script>
-    // رندر اولیه نمودار مقایسه‌ای
     const ctx = document.getElementById('fuelChart').getContext('2d');
     let fuelChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['تولید پالایشگاه', 'توزیع خطوط لوله', 'تخلیه انبارها', 'تحویل به نازل‌ها', 'مصرف باک'],
+            labels: ['تولید پالایشگاه', 'توزیع خطوط لوله', 'تخلیه انبارها', 'تحویل جایگاه‌ها', 'مصرف باک'],
             datasets: [{
                 label: 'حجم سوخت بر حسب هزار لیتر (kL)',
                 data: [110500, 85200, 22800, 108150, 106900],
@@ -448,27 +496,22 @@
         }
     });
 
-    // تابع اجرای محاسبات، ANFIS و بهینه‌سازی فراابتکاری
     function runFuelOptimization() {
         const algo = document.getElementById('metaheuristic_algo').value;
         const api = parseFloat(document.getElementById('api_gravity').value);
 
-        // شبیه‌سازی محاسبات الگوریتم‌های فراابتکاری و ANFIS
         let baseLeakage = Math.floor(Math.random() * (1350000 - 950000) + 950000);
         let errorRate = ((Math.random() * (0.30 - 0.12)) + 0.12).toFixed(2);
         let fitness = ((Math.random() * (99.9 - 98.8)) + 98.8).toFixed(2);
         let hilLatency = ((Math.random() * (3.1 - 1.6)) + 1.6).toFixed(1);
 
-        // اعمال ضریب تصحیح چگالی
         baseLeakage = Math.floor(baseLeakage * (api / 0.745));
 
-        // به‌روزرسانی پنل تله‌متری
         document.getElementById('fuel_leakage').innerText = baseLeakage.toLocaleString('fa-IR') + ' لیتر';
         document.getElementById('mass_error').innerText = errorRate + '٪ (تلورانس استاندارد)';
         document.getElementById('fitness_score').innerText = fitness + '٪ (' + algo.toUpperCase() + ')';
         document.getElementById('hil_latency').innerText = hilLatency + ' میلی‌ثانیه';
         
-        // به‌روزرسانی دینامیک بار نمودار
         fuelChart.data.datasets[0].data[3] = 108150 - Math.floor(Math.random() * 400);
         fuelChart.update();
     }
