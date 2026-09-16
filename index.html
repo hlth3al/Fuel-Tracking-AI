@@ -1,17 +1,62 @@
-در کد
-پنل نقطه یابی بهینه اکتشاف نفت
- https://hlth3al.github.io/Descovery-Oil-AI/
-عنوانش را بزار:
-پنل فرماندهی عملیات نقطه یابی بهینه اکتشاف نفت و گاز و کانسنگها
-و این کادر زیر رو تغیر بده به کادر زیریش:
-
-بیانیه حقوقی و فنی سیستم (Demo Verification):
-
-جهت ممانعت از کپی‌برداری غیرمجاز و حفظ حقوق مالکیت فکری، این نسخه ارائه‌شده صرفاً یک دمو با داده‌های نمونه و تقلیل‌یافته (Synthetic/Minimal) می‌باشد. در صورت ثبت سفارش صنعتی، پنل نهایی به‌صورت تکاملی توسعه یافته و از طریق پروتکل‌های سخت‌افزاری صنعتی (HIL) به لبه‌های پردازشی واقعی (Real-Time Sensors Edge)، داده‌های زلزله‌نگاری سه‌بعدی و مدل‌های شبیه‌ساز Simulink متصل می‌گردد تا نقطه بهینه حفاری اکتشافی را با کمترین ضریب خطا محاسبه نماید.
-
-.....
-
-بیانیه حقوقی و فنی سیستم (Demo Verification):
-
-جهت ممانعت از کپی‌برداری غیرمجاز و حفظ حقوق مالکیت فکری، این نسخه ارائه‌شده صرفاً یک دمو با داده‌های نمونه و تقلیل‌یافته (Synthetic/Minimal) می‌باشد. در صورت ثبت سفارش صنعتی، پنل نهایی به‌صورت تکاملی توسعه یافته و از طریق پروتکل‌های سخت‌افزاری صنعتی (HIL) به لبه‌های پردازشی واقعی (Real-Time Sensors Edge)، داده‌های زلزله‌نگاری سه‌بعدی و مدل‌های شبیه‌ساز Simulink متصل می‌گردد تا نقطه بهینه حفاری اکتشافی را با کمترین ضریب خطا محاسبه نماید.
-و هر زمان پل واقعی Simulink/HIL و سنسورهای هوش مصنوعی لبه فدرال متصل شوند، سیستم آماده دریافت اطلاعات زنده خواهد بود.
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پنل مانیتورینگ زنجیره سوخت کشور | هوش مصنوعی حسین لعلیان</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root { --bg: #070a12; --panel: rgba(15, 23, 42, 0.85); --cyan: #00e5ff; --green: #10b981; --text: #f8fafc; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Vazirmatn', sans-serif; }
+        body { background: var(--bg); color: var(--text); padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,229,255,0.2); padding-bottom: 15px; margin-bottom: 25px; }
+        h1 { color: var(--cyan); font-size: 1.4rem; }
+        .back-btn { background: rgba(0,229,255,0.1); color: var(--cyan); border: 1px solid var(--cyan); padding: 8px 16px; border-radius: 8px; text-decoration: none; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-bottom: 25px; }
+        .stat-card { background: var(--panel); border: 1px solid rgba(0,229,255,0.2); padding: 15px; border-radius: 10px; }
+        .stat-card h4 { color: #94a3b8; font-size: 0.85rem; }
+        .stat-card .val { font-size: 1.3rem; font-weight: 800; color: #fff; margin-top: 5px; }
+        .chart-container { background: var(--panel); border: 1px solid rgba(0,229,255,0.2); padding: 20px; border-radius: 12px; }
+        footer { text-align: center; margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; color: #94a3b8; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fa-solid fa-gas-pump"></i> پنل جامع هوش مصنوعی مانیتورینگ زنجیره سوخت کشور</h1>
+            <a href="https://hlth3al.github.io/Hossein-Laaliyan-AI/" class="back-btn"><i class="fa-solid fa-arrow-right"></i> بازگشت</a>
+        </header>
+        <div class="stats">
+            <div class="stat-card"><h4>تولید روزانه پالایشگاه‌ها</h4><div class="val">۱۱۲.۵ میلیون لیتر</div></div>
+            <div class="stat-card"><h4>ناوگان در حال حمل</h4><div class="val">۱۴,۲۵۰ تانکر</div></div>
+            <div class="stat-card"><h4>دقت هوش مصنوعی در کشف قاچاق</h4><div class="val" style="color: var(--cyan);">۹۹.۴٪</div></div>
+            <div class="stat-card"><h4>تراز توزیع کشوری</h4><div class="val" style="color: var(--green);">پایدار و بهینه</div></div>
+        </div>
+        <div class="chart-container">
+            <h3 style="color: var(--cyan); margin-bottom: 15px;"><i class="fa-solid fa-chart-line"></i> نمودار توزیع و پایش آنلاین (پالایشگاه تا جایگاه)</h3>
+            <canvas id="fuelChart" height="100"></canvas>
+        </div>
+        <footer>طراحی و توسعه مهندسی: <strong>حسین لعلیان</strong> (رتبه ۳۲ کنکور دکتری) | شرکت صنایع پردرآمد تهرانیها</footer>
+    </div>
+    <script>
+        const ctx = document.getElementById('fuelChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00', '24:00'],
+                datasets: [{
+                    label: 'توزیع پالایشگاهی',
+                    data: [85, 78, 95, 110, 112, 105, 90],
+                    borderColor: '#00e5ff',
+                    fill: true,
+                    backgroundColor: 'rgba(0, 229, 255, 0.1)'
+                }]
+            },
+            options: { responsive: true, plugins: { legend: { labels: { color: '#94a3b8' } } } }
+        });
+    </script>
+</body>
+</html>
