@@ -3,60 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>پنل مانیتورینگ زنجیره سوخت کشور | هوش مصنوعی حسین لعلیان</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>FUEL-TRACKING-AI | سامانه جامع پایش هوشمند زنجیره سوخت</title>
     <style>
-        :root { --bg: #070a12; --panel: rgba(15, 23, 42, 0.85); --cyan: #00e5ff; --green: #10b981; --text: #f8fafc; }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Vazirmatn', sans-serif; }
-        body { background: var(--bg); color: var(--text); padding: 20px; }
-        .container { max-width: 1200px; margin: 0 auto; }
-        header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,229,255,0.2); padding-bottom: 15px; margin-bottom: 25px; }
-        h1 { color: var(--cyan); font-size: 1.4rem; }
-        .back-btn { background: rgba(0,229,255,0.1); color: var(--cyan); border: 1px solid var(--cyan); padding: 8px 16px; border-radius: 8px; text-decoration: none; }
-        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-bottom: 25px; }
-        .stat-card { background: var(--panel); border: 1px solid rgba(0,229,255,0.2); padding: 15px; border-radius: 10px; }
-        .stat-card h4 { color: #94a3b8; font-size: 0.85rem; }
-        .stat-card .val { font-size: 1.3rem; font-weight: 800; color: #fff; margin-top: 5px; }
-        .chart-container { background: var(--panel); border: 1px solid rgba(0,229,255,0.2); padding: 20px; border-radius: 12px; }
-        footer { text-align: center; margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; color: #94a3b8; }
+        :root {
+            --bg-main: #020617;
+            --panel-bg: rgba(15, 23, 42, 0.9);
+            --border-ui: #1e293b;
+            --accent-fuel: #ef4444; /* قرمز برای هشدار سوخت */
+            --accent-green: #10b981;
+            --text-light: #f8fafc;
+            --text-dim: #94a3b8;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        body { background-color: var(--bg-main); color: var(--text-light); font-size: 13px; padding: 15px; line-height: 1.6; }
+
+        .header { background: #0f172a; border: 1px solid var(--accent-fuel); border-radius: 8px; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .header h1 { font-size: 18px; color: var(--accent-fuel); }
+        .badge { background: rgba(239, 68, 68, 0.15); color: var(--accent-fuel); border: 1px solid var(--accent-fuel); padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: bold; }
+
+        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
+        @media (max-width: 768px) { .grid-container { grid-template-columns: 1fr; } }
+
+        .card { background: var(--panel-bg); border: 1px solid var(--border-ui); border-radius: 8px; padding: 15px; }
+        .card-title { font-size: 14px; font-weight: bold; color: var(--accent-fuel); margin-bottom: 12px; border-bottom: 1px solid var(--border-ui); padding-bottom: 6px; }
+
+        .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+        .metric-box { background: #020617; border: 1px solid var(--border-ui); padding: 10px; border-radius: 6px; }
+        .metric-box span { font-size: 11px; color: var(--text-dim); display: block; }
+        .metric-box strong { font-size: 17px; color: #fff; display: block; margin-top: 4px; }
+
+        .legal-box { background: rgba(15, 23, 42, 0.95); border: 1px solid var(--accent-fuel); border-right: 4px solid var(--accent-fuel); padding: 18px 20px; border-radius: 8px; margin-bottom: 15px; color: #e2e8f0; line-height: 1.8; }
+        .legal-box h3 { color: var(--accent-fuel); margin-bottom: 10px; font-size: 14px; }
+
+        .footer-card { background: #090d16; border: 1px solid var(--border-ui); padding: 15px 20px; border-radius: 6px; }
+        .footer-card code { color: var(--accent-fuel); font-size: 13px; font-weight: bold; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1><i class="fa-solid fa-gas-pump"></i> پنل جامع هوش مصنوعی مانیتورینگ زنجیره سوخت کشور</h1>
-            <a href="https://hlth3al.github.io/Hossein-Laaliyan-AI/" class="back-btn"><i class="fa-solid fa-arrow-right"></i> بازگشت</a>
-        </header>
-        <div class="stats">
-            <div class="stat-card"><h4>تولید روزانه پالایشگاه‌ها</h4><div class="val">۱۱۲.۵ میلیون لیتر</div></div>
-            <div class="stat-card"><h4>ناوگان در حال حمل</h4><div class="val">۱۴,۲۵۰ تانکر</div></div>
-            <div class="stat-card"><h4>دقت هوش مصنوعی در کشف قاچاق</h4><div class="val" style="color: var(--cyan);">۹۹.۴٪</div></div>
-            <div class="stat-card"><h4>تراز توزیع کشوری</h4><div class="val" style="color: var(--green);">پایدار و بهینه</div></div>
-        </div>
-        <div class="chart-container">
-            <h3 style="color: var(--cyan); margin-bottom: 15px;"><i class="fa-solid fa-chart-line"></i> نمودار توزیع و پایش آنلاین (پالایشگاه تا جایگاه)</h3>
-            <canvas id="fuelChart" height="100"></canvas>
-        </div>
-        <footer>طراحی و توسعه مهندسی: <strong>حسین لعلیان</strong> (رتبه ۳۲ کنکور دکتری) | شرکت صنایع پردرآمد تهرانیها</footer>
+
+    <div class="header">
+        <h1>⛽ FUEL-TRACKING-AI | سامانه پایش زنجیره سوخت</h1>
+        <span class="badge">HIL SIMULINK CONNECTED</span>
     </div>
-    <script>
-        const ctx = document.getElementById('fuelChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00', '24:00'],
-                datasets: [{
-                    label: 'توزیع پالایشگاهی',
-                    data: [85, 78, 95, 110, 112, 105, 90],
-                    borderColor: '#00e5ff',
-                    fill: true,
-                    backgroundColor: 'rgba(0, 229, 255, 0.1)'
-                }]
-            },
-            options: { responsive: true, plugins: { legend: { labels: { color: '#94a3b8' } } } }
-        });
-    </script>
+
+    <div class="grid-container">
+        <div class="card">
+            <div class="card-title">تله‌متری جریان پالایشگاه به شبکه توزیع</div>
+            <div class="metrics-grid">
+                <div class="metric-box">
+                    <span>حجم خروجی پالایشگاه:</span>
+                    <strong>۸۴,۲۰۰ m³</strong>
+                </div>
+                <div class="metric-box">
+                    <span>نرخ نشت/هدررفت:</span>
+                    <strong style="color: var(--accent-green);">۰٫۰۲٪ (نرمال)</strong>
+                </div>
+            </div>
+            <div style="background: #020617; border: 1px solid var(--border-ui); padding: 10px; border-radius: 6px;">
+                <span>وضعیت فشار خطوط لوله:</span>
+                <strong style="font-size: 16px;">۶۸ bar (پایدار)</strong>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">تحلیل هوشمند مصرف‌کننده نهایی</div>
+            <div class="metrics-grid">
+                <div class="metric-box">
+                    <span>تعداد تراکنش سوخت‌گیری:</span>
+                    <strong>۱,۲۴۰ مورد</strong>
+                </div>
+                <div class="metric-box">
+                    <span>دقت پیش‌بینی تقاضا:</span>
+                    <strong>۹۸٫۴٪</strong>
+                </div>
+            </div>
+            <div style="color: var(--text-dim); font-size: 12px; margin-top: 10px;">
+                الگوریتم ANFIS جهت پیش‌بینی نوسانات تقاضا و جلوگیری از ایجاد صف در جایگاه‌ها فعال است.
+            </div>
+        </div>
+    </div>
+
+    <!-- کادر اخطار رسمی -->
+    <div class="legal-box">
+        <h3>اخطار رسمی ممانعت از کپی‌برداری و پیاده‌سازی عملیاتی:</h3>
+        <p>هر زمان پل واقعی Simulink/HIL متصل شود، سیستم آماده دریافت تله‌متری زنده خواهد بود.</p>
+        <p>به جهت ممانعت از کپی‌برداری غیرمجاز و حفظ الگوریتم‌های راهبردی، این داشبورد صرفاً به عنوان یک دموی عمومی با امکانات محدودشده (Protected Demo) بارگذاری شده است.</p>
+        <p>در صورت سفارش، این سامانه به شکلی اختصاصی بازطراحی و تحویل خواهد شد که با اتصال بی‌واسطه به لبه‌های واقعی سخت‌افزاری (Hardware-in-the-Loop - HIL)، سنسورهای آکوستیک، میکروکنترلرهای ناوبری، پایگاه استنتاج فازی ANFIS و بلوک‌های مدل‌سازی‌شده در Simulink، بهینه‌ترین و پایدارترین پاسخ دینامیکی و هدایتی را در شرایط عملیاتی زیرسطحی فراهم آورد.</p>
+    </div>
+
+    <div class="footer-card">
+        <p>طراحی و توسعه مهندسی: <strong>حسین لعلیان؛ رتبه ۳۲ کنکور دکتری</strong></p>
+        <p>رایانامه رسمی ارتباطات صنعتی: <code>ai.algorithms.ballistics@gmail.com</code></p>
+    </div>
+
 </body>
 </html>
