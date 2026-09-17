@@ -1,136 +1,283 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fuel-Tracking-AI | سامانه پایش و مانیتورینگ هوشمند زنجیره سوخت کشور</title>
-    <style>
-        :root {
-            --bg-main: #060b13;
-            --panel-bg: rgba(13, 22, 35, 0.9);
-            --border-ui: #1f334d;
-            --accent-fuel: #f59e0b;
-            --accent-blue: #38bdf8;
-            --accent-green: #10b981;
-            --accent-red: #ef4444;
-            --text-light: #f1f5f9;
-            --text-dim: #94a3b8;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fuel-Tracking-AI | سامانه پایش و مانیتورینگ هوشمند زنجیره سوخت کشور</title>
+<style>
+:root {
+  --bg-main: #060d17;
+  --panel-bg: rgba(13, 27, 42, 0.9);
+  --border-ui: #1f3a5f;
+  --accent-cyan: #00f2fe;
+  --accent-blue: #3a86ff;
+  --accent-green: #00ff88;
+  --accent-red: #ff3366;
+  --accent-gold: #ffbe0b;
+  --text-light: #e0e6ed;
+  --text-dim: #94a3b8;
+}
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; }
-        body { background-color: var(--bg-main); color: var(--text-light); font-size: 13px; padding: 15px; line-height: 1.6; }
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; }
+body { background-color: var(--bg-main); color: var(--text-light); font-size: 13px; padding: 15px; line-height: 1.6; }
 
-        .header { background: #0c1829; border: 1px solid var(--accent-fuel); border-radius: 8px; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; box-shadow: 0 0 15px rgba(245, 158, 11, 0.15); }
-        .header h1 { font-size: 17px; color: var(--accent-fuel); }
-        .badge { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); border: 1px solid var(--accent-green); padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: bold; }
+.header { background: #0b1a30; border: 1px solid var(--accent-cyan); border-radius: 8px; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; box-shadow: 0 0 15px rgba(0, 242, 254, 0.15); flex-wrap: wrap; gap: 10px; }
+.header h1 { font-size: 17px; color: var(--accent-cyan); letter-spacing: 0.5px; }
+.badge { background: rgba(0, 255, 136, 0.15); color: var(--accent-green); border: 1px solid var(--accent-green); padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: bold; }
 
-        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
-        @media (max-width: 768px) { .grid-container { grid-template-columns: 1fr; } }
+.grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
+@media (max-width: 768px) { .grid-container { grid-template-columns: 1fr; } }
 
-        .card { background: var(--panel-bg); border: 1px solid var(--border-ui); border-radius: 8px; padding: 15px; }
-        .card-title { font-size: 14px; font-weight: bold; color: var(--accent-blue); margin-bottom: 12px; border-bottom: 1px solid var(--border-ui); padding-bottom: 6px; }
+.card { background: var(--panel-bg); border: 1px solid var(--border-ui); border-radius: 8px; padding: 15px; backdrop-filter: blur(5px); }
+.card-title { font-size: 14px; font-weight: bold; color: var(--accent-blue); margin-bottom: 12px; border-bottom: 1px solid var(--border-ui); padding-bottom: 6px; }
 
-        .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
-        .metric-box { background: #07101c; border: 1px solid var(--border-ui); padding: 10px; border-radius: 6px; }
-        .metric-box span { font-size: 11px; color: var(--text-dim); display: block; }
-        .metric-box strong { font-size: 16px; color: #fff; display: block; margin-top: 4px; }
+.metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+.metric-box { background: #071526; border: 1px solid var(--border-ui); padding: 10px; border-radius: 6px; }
+.metric-box span { font-size: 11px; color: var(--text-dim); display: block; }
+.metric-box strong { font-size: 15px; color: #fff; display: block; margin-top: 4px; }
 
-        .btn { background: #132742; color: #fff; border: 1px solid #23456f; padding: 10px; border-radius: 6px; cursor: pointer; width: 100%; margin-bottom: 8px; text-align: right; font-size: 12px; transition: 0.2s; }
-        .btn:hover { border-color: var(--accent-fuel); background: #1d395f; }
-        .btn-danger { border-color: var(--accent-red); color: #fca5a5; }
+.btn { background: #0e2744; color: #fff; border: 1px solid #1c4b7a; padding: 10px; border-radius: 6px; cursor: pointer; width: 100%; margin-bottom: 8px; text-align: right; font-size: 12px; transition: 0.2s; }
+.btn:hover { border-color: var(--accent-cyan); background: #153860; }
+.btn-danger { border-color: var(--accent-red); color: #ff99aa; }
 
-        .console { background: #050b14; border: 1px solid var(--border-ui); border-radius: 6px; padding: 10px; height: 140px; overflow-y: auto; font-family: monospace; font-size: 11px; color: #38bdf8; }
+.console { background: #040c17; border: 1px solid var(--border-ui); border-radius: 6px; padding: 10px; height: 140px; overflow-y: auto; font-family: monospace; font-size: 11px; color: #00f2fe; line-height: 1.8; }
 
-        /* Legal Box Style */
-        .legal-box {
-            background: rgba(12, 24, 41, 0.95);
-            border: 1px solid var(--accent-fuel);
-            border-right: 4px solid var(--accent-fuel);
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            color: #e2e8f0;
-            line-height: 1.8;
-            box-shadow: 0 0 12px rgba(245, 158, 11, 0.1);
-        }
-        .legal-box h3 { color: var(--accent-fuel); margin-bottom: 10px; font-size: 14px; }
-        .legal-box p { margin-bottom: 10px; }
+/* Legal Box */
+.legal-box {
+  background: rgba(11, 26, 48, 0.95);
+  border: 1px solid var(--accent-cyan);
+  border-right: 4px solid var(--accent-cyan);
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  color: #ccd6f6;
+  line-height: 1.8;
+  box-shadow: 0 0 10px rgba(0, 242, 254, 0.1);
+}
+.legal-box h3 { color: var(--accent-cyan); margin-bottom: 10px; font-size: 14px; }
+.legal-box p { margin-bottom: 10px; }
 
-        .footer-card { background: #07101d; border: 1px solid var(--border-ui); padding: 15px 20px; border-radius: 6px; }
-        .footer-card code { color: var(--accent-fuel); font-size: 14px; font-weight: bold; }
-    </style>
-</head>
-<body>
+.footer-card { background: #05101f; border: 1px solid var(--border-ui); padding: 15px 20px; border-radius: 6px; text-align: center; margin-bottom: 15px; }
+.footer-card code { color: var(--accent-cyan); font-size: 13px; font-weight: bold; font-family: monospace; }
 
-    <div class="header">
-        <h1>⛽ Fuel-Tracking-AI | پایش و مانیتورینگ هوشمند زنجیره سوخت کشور (پالایشگاه تا باک)</h1>
-        <span class="badge">HIL SIMULINK CONNECTED</span>
+/* Accordion Section */
+.interactive-section { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
+.accordion-btn {
+  background: linear-gradient(90deg, #0b223f, #071526);
+  border: 1px solid #1f3a5f;
+  border-right: 4px solid var(--accent-cyan);
+  color: #f1f5f9;
+  padding: 14px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: right;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.25s ease;
+  width: 100%;
+}
+.accordion-btn:hover {
+  background: linear-gradient(90deg, #13335a, #0b223f);
+  border-right-color: var(--accent-green);
+  transform: translateX(-3px);
+}
+.accordion-content {
+  display:px; }
+.legal-box p { margin-bottom: 10px; }
+
+.footer-card { background: #05101f; border: 1px solid var(--border-ui); padding: 15px 20px; border-radius: 6px; text-align: center; margin-bottom: 15px; }
+.footer-card code { color: var(--accent-cyan); font-size: 13px; font-weight: bold; font-family: monospace; }
+
+/* Accordion Section */
+.interactive-section { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
+.accordion-btn {
+  background: linear-gradient(90deg, #0b223f, #071526);
+  border: 1px solid #1f3a5f;
+  border-right: 4px solid var(--accent-cyan);
+  color: #f1f5f9;
+  padding: 14px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: right;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.25s ease;
+  width: 100%;
+}
+.accordion-btn:hover {
+  background: linear-gradient(90deg, #13335a, #0b223f);
+  border-right-color: var(--accent-green);
+  transform: translateX(-3px);
+}
+.accordion-content {
+  display: none;
+  background: #051121;
+  border: 1px solid #1f3a5f;
+  border-top: none;
+  padding: 16px 20px;
+  border-radius: 0 0 8px 8px;
+  font-size: 1flow-rate">۱۱۴٫۲ میلیون لیتر/روز</strong>
+      </div>
+      <div class="metric-box">
+        <span>موجودی فعال انبارهای نفت:</span>
+        <strong>۸۷٫۴٪ ظرفیت ایمن</strong>
+      </div>
+      <div class="metric-box">
+        <span>انحراف محاسباتی دیسپچرینگ:</span>
+        <strong style="color: var(--accent-green);">۰٫۰۴٪ (محدوده مجاز)</strong>
+      </div>
+      <div class="metric-box">
+        <span>سنسورهای لبه نازل و تانکر:</span>
+        <strong style="color: var(--accent-cyan);">اتصال امن فدرال</strong>
+      </div>
     </div>
+    <button class="btn" onclick="triggerAction('MASS_BALANCE')">📊 تطبیق بلادرنگ موازنه جرمی و دبی‌سنج‌های کوریولیس</button>
+    <button class="btn" onclick="triggerAction('ANOMALY')">🔍 اجرای الگوریتم ANFIS جهت شناسایی مغایرت و قاچاق خطی</button>
+    <button class="btn btn-danger" onclick="triggerAction('ISOLATE')">🚨 ایزولاسیون هوشمند شیرهای اطمینان و انسداد مسیر مشکوک</button>
+  </div>
 
-    <div class="grid-container">
-        <div class="card">
-            <div class="card-title">تله‌متری جریان پالایش، خطوط لوله و توزیع جایگاهی</div>
-            <div class="metrics-grid">
-                <div class="metric-box">
-                    <span>نرخ انتقال خطوط سراسری:</span>
-                    <strong>۱۱۴٫۲ میلیون لیتر/روز</strong>
-                </div>
-                <div class="metric-box">
-                    <span>موجودی فعال انبارهای نفت:</span>
-                    <strong>۸۷٫۴٪ ظرفیت ایمن</strong>
-                </div>
-                <div class="metric-box">
-                    <span>انحراف محاسباتی دیسپچرینگ:</span>
-                    <strong style="color: var(--accent-green);">۰٫۰۴٪ (محدوده مجاز)</strong>
-                </div>
-                <div class="metric-box">
-                    <span>سنسورهای لبه نازل و تانکر:</span>
-                    <strong style="color: var(--accent-blue);">اتصال امن فدرال</strong>
-                </div>
-            </div>
-            <div style="background: #07101c; border: 1px solid var(--border-ui); padding: 10px; border-radius: 6px; margin-top: 10px;">
-                <span style="font-size: 11px; color: var(--text-dim);">الگوریتم پایش ناهنجاری و کشف قاچاق سازمان‌یافته (ANFIS):</span>
-                <div style="font-size: 15px; font-weight: bold; color: var(--accent-fuel); margin-top: 4px;">۹۹٫۱٪ همبستگی داده‌های پالایشگاهی و مصرف نهایی</div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-title">فرمان‌های کنترلی لبه سخت‌افزاری و ایزولاسیون مسیر</div>
-            <button class="btn" onclick="triggerAction('LEAK')">🔍 آزمون بالانس جرم و تشخیص نشتی هیدرولیکی لوله (Mass-Balance)</button>
-            <button class="btn" onclick="triggerAction('DIVERSION')">🚨 شبیه‌سازی انحراف غیرمجاز محموله نفتکش جاده‌ای</button>
-            <button class="btn btn-danger" onclick="triggerAction('SHUTOFF')">⚡ قطع اضطراری شیرهای اطمینان خط انتقال اصلی (Emergency Shutoff)</button>
-            <div class="console" id="logBox" style="margin-top: 10px;">
-                <div>[سیستم] اتصال بی‌درنگ لایه فیزیکی به سنسورهای دبی‌سنجی کوریولیس برقرار است.</div>
-            </div>
-        </div>
+  <!-- لاگ فرامین و خروجی HIL -->
+  <div class="card">
+    <div class="card-title">ترمینال هوش لبه فدرال و پایش ناهنجاری (ANFIS)</div>
+    <div class="console" id="console-log">
+      [سیستم] اتصال بی‌درنگ لایه فیزیکی به سنسورهای دبی‌سنجی کوریولیس برقرار است.<br>
+      [سیستم] ۹۹٫۱٪ همبستگی داده‌های پالایشگاهی و مصرف نهایی ثبت شد.<br>
+      [دیسپچرینگ] تله‌متری مخازن بارگیری ری و اصفهان در وضعیت نرمال.<br>
+      [آماده‌باش] پایگاه قواعد فازی آماده پردازش جریان داده‌های مکانی تانکرها و کارت‌های سوخت.
     </div>
+  </div>
+</div>
 
-    <!-- کادر اخطار رسمی ممانعت از کپی‌برداری -->
-    <div class="legal-box">
-        <h3>اخطار رسمی ممانعت از کپی‌برداری و پیاده‌سازی عملیاتی:</h3>
-        <p>هر زمان پل واقعی Simulink/HIL سنسورهای لبه هوش مصنوعی فدرال متصل شود، سیستم آماده دریافت اطلاعات زنده خواهد بود.</p>
-        <p>به جهت ممانعت از کپی‌برداری غیرمجاز و حفظ الگوریتم‌های راهبردی، این پلتفرم صرفاً به عنوان یک دموی عمومی با امکانات محدودشده (Protected Demo) بارگذاری شده است.</p>
-        <p>در صورت سفارش، این سامانه به شکلی اختصاصی بازطراحی و تحویل خواهد شد که با اتصال بی‌واسطه به لبه‌های واقعی سخت‌افزاری (Hardware-in-the-Loop - HIL)، پایگاه استنتاج فازی ANFIS و بلوک‌های مدل‌سازی‌شده در Simulink، پایدارترین پاسخ دینامیکی،هدایتی و بهینه را در شرایط عملیاتی فراهم آورد.</p>
-    </div>
+<!-- کادر اخطار رسمی ممانعت از کپی‌برداری -->
+<div class="legal-box">
+  <h3>اخطار رسمی ممانعت از کپی‌برداری و پیاده‌سازی عملیاتی:</h3>
+  <p>هر زمان پل واقعی Simulink/HIL سنسورهای لبه هوش مصنوعی فدرال متصل شود، سیستم آماده دریافت اطلاعات زنده خواهد بود.</p>
+  <p>به جهت ممانعت از کپی‌برداری غیرمجاز و حفظ الگوریتم‌های راهبردی، این پلتفرم صرفاً به عنوان یک دموی عمومی با امکانات محدودشده (Protected Demo) بارگذاری شده است.</p>
+  <p>در صورت سفارش، این سامانه به شکلی اختصاصی بازطراحی و تحویل خواهد شد که با اتصال بی‌واسطه به لبه‌های واقعی سخت‌افزاری (Hardware-in-the-Loop - HIL)، پایگاه استنتاج فازی ANFIS و بلوک‌های مدل‌سازی‌شده در Simulink، پایدارترین پاسخ دینامیکی، هدایتی و بهینه را در شرایط عملیاتی فراهم آورد.</p>
+</div>
 
-    <div class="footer-card">
-        <p>طراحی و توسعه مهندسی: <strong>حسین لعلیان؛ رتبه ۳۲ کنکور دکتری</strong></p>
-        <p>رایانامه رسمی ارتباطات صنعتی: <code>ai.algorithms.ballistics@gmail.com</code></p>
-    </div>
+<!-- شناسنامه طراح بدون سال ۱۳۹۵ -->
+<div class="footer-card">
+  طراحی و توسعه مهندسی: <strong>حسین لعلیان؛ رتبه ۳۲ کنکور دکتری</strong><br>
+  رایانامه رسمی ارتباطات صنعتی: <code>ai.algorithms.ballistics@gmail.com</code>
+</div>
 
-    <script>
-        function triggerAction(type) {
-            const log = document.getElementById('logBox');
-            const time = new Date().toLocaleTimeString('fa-IR');
-            let text = "";
-            if(type === 'LEAK') text = `[${time}] افت فشار دینامیکی در قطعه ۲۸ خط انتقال ارزیابی شد: انحراف حجمی صفر، تمامیت لوله تأیید است.`;
-            else if(type === 'DIVERSION') text = `[${time}] هشدار تله‌متری: بارنامه الکترونیکی محموله تانکر با موقعیت ژئوفنسینگ و حجم تحویلی ناهمخوان است. دستور تعلیق سهمیه صادر شد.`;
-            else if(type === 'SHUTOFF') text = `[${time}] فرمان اینترلاک ایمنی ارسال شد. والوهای هیدرولیکی ورودی مخازن در وضعیت ایزوله امن قرار گرفتند.`;
-            const item = document.createElement('div');
-            item.innerText = text;
-            log.appendChild(item);
-            log.scrollTop = log.scrollHeight;
-        }
-    </script>
+<!-- بخش ۵ دکمه اختصاصی زنجیره سوخت -->
+<div class="interactive-section">
+
+  <!-- دکمه ۱ -->
+  <button class="accordion-btn" onclick="toggleAccordion(this)">
+    <span>🔘 دکمه ۱: این دکمه را بفشار تا متصل شوی به طرح توجیهی عملیاتی این پلتفرم!</span>
+    <span class="btn-icon">◀</span>
+  </button>
+  <div class="accordion-content">
+    <h4>مهار فوری هدررفت ملی، انحراف فرآورده و مدیریت هوشمند موازنه سوخت</h4>
+    <p><strong>معرفی سامانه فرماندهی و مانیتورینگ جامع زنجیره سوخت کشور (Fuel-Tracking-AI):</strong></p>
+    <p>زنجیره تامین، انتقال و توزیع سوخت کشور با دو چالش و هدررفت عظیم مالی و حاکمیتی روبروست:</p>
+    <ul>
+      <li><strong>۱. انحراف حجمی و قاچاق سازمان‌یافته فرآورده:</strong> اختلاف آماری میان خروجی پالایشگاه‌ها، خطوط انتقال، انبارهای نفت و حجم ورودی به باک مصرف‌کنندگان در جایگاه‌ها.</li>
+      <li><strong>۲. خطای دیسپاچینگ، کسری تانکرها و تاخیر در کشف نشتی:</strong> عدم موازنه بلادرنگ جرمی و فیزیکی سیال که منجر به کسری انبارها، بارگیری‌های صوری و سرقت از خطوط لوله سراسری می‌شود.</li>
+    </ul>
+    <p><strong>راهکار عملیاتی:</strong> استقرار مغز نرم‌افزاری بلادرنگ متصل به دبی‌سنج‌های کوریولیس، حسگرهای مغناطیسی سطح مخزن، بارنامه‌های دیجیتال و سامانه‌های پایش هوشمند نازل‌ها جهت انطباق ۱۰۰ درصدی داده‌ها و صفرسازی هدررفت نامتعارف.</p>
+    <h4>این داشبورد در زنجیره سوخت چه کاری انجام می‌دهد؟</h4>
+    <ul>
+      <li><strong>تطبیق بلادرنگ موازنه جرمی (Mass Balance Verification):</strong> مقایسه دقیق جرم و دمای سوخت تحویلی از پالایشگاه با حجم رسیده به مخازن جایگاه در هر ثانیه.</li>
+      <li><strong>کشف فوری انحراف و بارگیری غیرمجاز:</strong> فعال‌سازی هشدارهای هوش مصنوعی به محض مشاهده کمترین مغایرت بین پیمایش ناوگان، بارنامه برخط و دبی تخلیه شده.</li>
+    </ul>
+  </div>
+
+  <!-- دکمه ۲ -->
+  <button class="accordion-btn" onclick="toggleAccordion(this)">
+    <span>🔘 دکمه ۲: این دکمه را بفشار تا متصل شوی به مکانیزم کاری و ارزش پیشنهادی!</span>
+    <span class="btn-icon">◀</span>
+  </button>
+  <div class="accordion-content">
+    <p><strong>مسئله مبرم بخش انرژی کشور:</strong> هدررفت روزانه ده‌ها میلیون لیتر سوخت یارانه‌ای، قاچاق سازمان‌یافته مرزی، دستکاری تلمبه‌ها و عدم شفافیت در زنجیره انبار تا باک.</p>
+    <h4>راهکار سامانه Fuel-Tracking-AI:</h4>
+    <ul>
+      <li><strong>دیده‌بانی یکپارچه زنجیره ارزش:</strong> پایش پیوسته خطوط لوله انتقال، انبارها، نفتکش‌های جاده‌ای و نازل‌های جایگاهی بر پایه هوش مصنوعی فدرال.</li>
+      <li><strong>کشف ناهنجاری با مدل فازی ANFIS:</strong> تفکیک تغییرات طبیعی ناشی از انبساط/انقباض حرارتی سوخت از افت جریان ناشی از سرقت و نشتی غیرقانونی لوله‌ها.</li>
+      <li><strong>ردیابی بیومتریک و دیجیتال نفتکش‌ها:</strong> تطبیق مختصات مکانی (GPS)، پلمب الکترونیکی مخزن و حسگرهای اولتراسونیک تخلیه با زمان و موقعیت معتبر.</li>
+      <li><strong>ارتباط مستقیم صنعتی و امن:</strong> سازگاری با سیستم‌های SCADA خطوط لوله، استانداردهای مخابراتی Modbus/OPC-UA و درگاه‌های متمرکز دیسپاچینگ ملی پالایش و پخش.</li>
+    </ul>
+  </div>
+
+  <!-- دکمه ۳ -->
+  <button class="accordion-btn" onclick="toggleAccordion(this)">
+    <span>🔘 دکمه ۳: این دکمه را بفشار تا متصل شوی به مسیر عملیاتی این پنل!</span>
+    <span class="btn-icon">◀</span>
+  </button>
+  <div class="accordion-content">
+    <ul>
+      <li><strong>دیده‌بانی چندمنظوره جریان هیدرولیکی:</strong> سامانه در هر لحظه دبی حجمی، چگالی استاندارد در ۱۵ درجه سانتی‌گراد، فشار خط و موجودی فعال مخازن را تحلیل می‌کند.</li>
+      <li><strong>الگوریتم پایش پیوسته کسری:</strong> در صورت بروز کمترین افت غیرعادی جریان بین مبدا و مقصد، الگوریتم بلافاصله موقعیت احتمالی افت فشار یا انشعاب غیرمجاز را تخمین می‌زند.</li>
+      <li><strong>دیسپاچینگ بهینه پخش فرآورده:</strong> مشخص می‌کند هر انبار نفت و هر جایگاه سوخت متناسب با پیش‌بینی تقاضای منطقه‌ای، در چه ساعاتی و از چه مبدائی تغذیه گردد تا ریسک قحطی سوخت یا دپوی پرخطر صفر شود.</li>
+      <li><strong>خروجی آماده فرماندهی و انسداد:</strong> قابلیت صدور فرامین اضطراری برای بستن شیرهای قطع خودکار (ESDV)، لغو مجوز بارگیری نازل‌های متخلف و ابطال لحظه‌ای سهمیه‌های مشکوک.</li>
+    </ul>
+  </div>
+
+  <!-- دکمه ۴ -->
+  <button class="accordion-btn" onclick="toggleAccordion(this)">
+    <span>🔘 دکمه ۴: این دکمه را بفشار تا متصل شوی به نکات کلیدی قرارداد!</span>
+    <span class="btn-icon">◀</span>
+  </button>
+  <div class="accordion-content">
+    <ol>
+      <li><strong>محدوده مسئولیت (Disclaimer):</strong> عملکرد هسته تحلیلی منوط به صحت دیتای مخابره‌شده از فلومترها، تله‌متری تلمبه‌ها و پلمب‌های هوشمند است؛ عیوب مکانیکی فیزیکی ادوات و خرابی ادوات خطی خارج از حیطه نرم‌افزار تحلیلی است.</li>
+      <li><strong>محرمانگی و امنیت سایبری داده‌ها (NDA):</strong> آمار تولید، ترافیک ناوگان حمل سوخت، ظرفیت انبارهای راهبردی و مسیرهای لوله به عنوان داده‌های حیاتی زیرساختی تحت پروتکل‌های امنیتی چندلایه‌ای کدگذاری و ایزوله می‌شوند.</li>
+      <li><strong>فاز پایلوت عملیاتی (POC Pilot):</strong> اجرای طرح در یک منطقه پخش منتخب به مدت ۱ الی ۳ ماه با معیارهای مشخص (کاهش مغایرت آماری انبار، کشف نشتی‌های مخفی و صحت تطبیق بارنامه‌ها).</li>
+    </ol>
+  </div>
+
+  <!-- دکمه ۵ -->
+  <button class="accordion-btn" onclick="toggleAccordion(this)">
+    <span>🔘 دکمه ۵: بفشار این دکمه را تا متصل شوی به مدل‌های پیشنهادی ما!</span>
+    <span class="btn-icon">◀</span>
+  </button>
+  <div class="accordion-content">
+    <h4>مدل اول: قرارداد تسهیم صرفه‌جویی و مهار قاچاق سوخت (Shared Savings / Recovery Based)</h4>
+    <p>استقرار پلتفرم پایش هوشمند در منطقه پایلوت بدون تحمیل بودجه سنگین اولیه؛ درصدی توافقی از ارزش ریالی سوختِ بازیابی‌شده از مهار کسری‌های غیرمجاز و جلوگیری از قاچاق سازمان‌یافته، طبق داده‌های موازنه، به عنوان حق‌الزحمه پروژه محاسبه و پرداخت می‌شود.</p>
+    
+    <h4>مدل دوم: واگذاری لایسنس سازمانی و سامانه دیسپاچینگ متمرکز (Enterprise AI License & SLA)</h4>
+    <p>فروش لایسنس جامع سامانه مانیتورینگ پالایشگاه تا باک، استقرار نرم‌افزار روی سرورهای اختصاصی کارفرما، اتصال پروتکل‌های صنعتی و ارائه پشتیبانی سالیانه با به‌روزرسانی مداوم مدل‌های یادگیری عمیق و هوش لبه فدرال.</p>
+  </div>
+
+</div>
+
+<script>
+function triggerAction(type) {
+  const log = document.getElementById('console-log');
+  const item = document.createElement('div');
+  const now = new Date().toLocaleTimeString('fa-IR');
+  
+  if(type === 'MASS_BALANCE') {
+    item.innerHTML = `[${now}] <span style="color:#00ff88;">[موازنه جرمی]</span> داده‌های خروجی با دبی‌سنج‌های کوریولیس تطبیق داده شد؛ انحراف در بازه مجاز (۰٫۰۲٪).`;
+  } else if(type === 'ANOMALY') {
+    item.innerHTML = `[${now}] <span style="color:#ffbe0b;">[الگوریتم ANFIS]</span> اسکن ناهنجاری پایان یافت؛ الگوی مشکوک در مسیر لوله ناحیه مرزی کشف نشد.`;
+  } else if(type === 'ISOLATE') {
+    item.innerHTML = `[${now}] <span style="color:#ff3366;">[ایزولاسیون]</span> سیگنال آماده‌باش به شیرهای خودکار (ESDV) و سامانه‌های لبه نازل صادر شد.`;
+  }
+  
+  log.appendChild(item);
+  log.scrollTop = log.scrollHeight;
+}
+
+function toggleAccordion(btn) {
+  btn.classList.toggle("active");
+  const content = btn.nextElementSibling;
+  if (content.style.display === "block") {
+    content.style.display = "none";
+  } else {
+    content.style.display = "block";
+  }
+}
+</script>
+
 </body>
 </html>
