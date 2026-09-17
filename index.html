@@ -5,156 +5,247 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fuel-Tracking-AI | سامانه پایش و مانیتورینگ هوشمند زنجیره سوخت کشور</title>
 <style>
-:root {
-  --bg-main: #060d17;
-  --panel-bg: rgba(13, 27, 42, 0.9);
-  --border-ui: #1f3a5f;
-  --accent-cyan: #00f2fe;
-  --accent-blue: #3a86ff;
-  --accent-green: #00ff88;
-  --accent-red: #ff3366;
-  --accent-gold: #ffbe0b;
-  --text-light: #e0e6ed;
-  --text-dim: #94a3b8;
-}
+  :root {
+    --bg: #070d18;
+    --card-bg: #0c182b;
+    --card-border: #162c4b;
+    --accent-cyan: #00d2ff;
+    --accent-green: #00e676;
+    --accent-amber: #ffb300;
+    --accent-red: #ff3366;
+    --text-primary: #f0f4f8;
+    --text-muted: #8ca3ba;
+    --font-stack: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Tahoma, Arial, sans-serif;
+  }
 
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; }
-body { background-color: var(--bg-main); color: var(--text-light); font-size: 13px; padding: 15px; line-height: 1.6; }
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font-stack); }
+  body { background-color: var(--bg); color: var(--text-primary); font-size: 13.5px; line-height: 1.7; padding: 16px; }
 
-.header { background: #0b1a30; border: 1px solid var(--accent-cyan); border-radius: 8px; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; box-shadow: 0 0 15px rgba(0, 242, 254, 0.15); flex-wrap: wrap; gap: 10px; }
-.header h1 { font-size: 17px; color: var(--accent-cyan); letter-spacing: 0.5px; }
-.badge { background: rgba(0, 255, 136, 0.15); color: var(--accent-green); border: 1px solid var(--accent-green); padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: bold; }
+  .header {
+    background: linear-gradient(135deg, #0f233f, #081322);
+    border: 1px solid var(--accent-cyan);
+    border-radius: 10px;
+    padding: 16px 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 20px rgba(0, 210, 255, 0.12);
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .header h1 { font-size: 18px; color: #ffffff; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+  .header h1 span { color: var(--accent-cyan); }
+  .badge-status {
+    background: rgba(0, 230, 118, 0.12);
+    color: var(--accent-green);
+    border: 1px solid var(--accent-green);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
 
-.grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
-@media (max-width: 768px) { .grid-container { grid-template-columns: 1fr; } }
+  .grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 16px; margin-bottom: 16px; }
+  @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
 
-.card { background: var(--panel-bg); border: 1px solid var(--border-ui); border-radius: 8px; padding: 15px; backdrop-filter: blur(5px); }
-.card-title { font-size: 14px; font-weight: bold; color: var(--accent-blue); margin-bottom: 12px; border-bottom: 1px solid var(--border-ui); padding-bottom: 6px; }
+  .panel {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 18px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+  }
+  .panel-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent-cyan);
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 8px;
+  }
 
-.metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
-.metric-box { background: #071526; border: 1px solid var(--border-ui); padding: 10px; border-radius: 6px; }
-.metric-box span { font-size: 11px; color: var(--text-dim); display: block; }
-.metric-box strong { font-size: 15px; color: #fff; display: block; margin-top: 4px; }
+  .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+  .metric-card {
+    background: #081220;
+    border: 1px solid #142845;
+    padding: 12px;
+    border-radius: 8px;
+  }
+  .metric-card .label { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; display: block; }
+  .metric-card .value { font-size: 15px; font-weight: bold; color: #ffffff; }
 
-.btn { background: #0e2744; color: #fff; border: 1px solid #1c4b7a; padding: 10px; border-radius: 6px; cursor: pointer; width: 100%; margin-bottom: 8px; text-align: right; font-size: 12px; transition: 0.2s; }
-.btn:hover { border-color: var(--accent-cyan); background: #153860; }
-.btn-danger { border-color: var(--accent-red); color: #ff99aa; }
+  .action-buttons { display: flex; flex-direction: column; gap: 8px; }
+  .btn-action {
+    background: #112644;
+    color: #e2e8f0;
+    border: 1px solid #20436d;
+    padding: 10px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: right;
+    transition: all 0.2s ease;
+  }
+  .btn-action:hover {
+    background: #1a3c6c;
+    border-color: var(--accent-cyan);
+    color: #ffffff;
+  }
+  .btn-danger {
+    border-color: #631b2c;
+    background: #200d14;
+    color: #ff859c;
+  }
+  .btn-danger:hover {
+    background: #38111d;
+    border-color: var(--accent-red);
+    color: #ffffff;
+  }
 
-.console { background: #040c17; border: 1px solid var(--border-ui); border-radius: 6px; padding: 10px; height: 140px; overflow-y: auto; font-family: monospace; font-size: 11px; color: #00f2fe; line-height: 1.8; }
+  .console-box {
+    background: #040912;
+    border: 1px solid #142845;
+    border-radius: 8px;
+    padding: 12px;
+    height: 165px;
+    overflow-y: auto;
+    font-family: Consolas, monospace;
+    font-size: 11.5px;
+    line-height: 1.8;
+    color: var(--accent-cyan);
+  }
 
-/* Legal Box */
-.legal-box {
-  background: rgba(11, 26, 48, 0.95);
-  border: 1px solid var(--accent-cyan);
-  border-right: 4px solid var(--accent-cyan);
-  padding: 20px;
-  border-radius: 8px;
-  margin-bottom: 15px;
-  color: #ccd6f6;
-  line-height: 1.8;
-  box-shadow: 0 0 10px rgba(0, 242, 254, 0.1);
-}
-.legal-box h3 { color: var(--accent-cyan); margin-bottom: 10px; font-size: 14px; }
-.legal-box p { margin-bottom: 10px; }
+  .legal-box {
+    background: linear-gradient(180deg, #0e1e35, #0a1526);
+    border: 1px solid #20416d;
+    border-right: 5px solid var(--accent-cyan);
+    padding: 18px 22px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+  }
+  .legal-box h3 { color: var(--accent-cyan); font-size: 14px; margin-bottom: 8px; font-weight: 700; }
+  .legal-box p { color: #b7c7db; font-size: 12.5px; margin-bottom: 8px; }
 
-.footer-card { background: #05101f; border: 1px solid var(--border-ui); padding: 15px 20px; border-radius: 6px; text-align: center; margin-bottom: 15px; }
-.footer-card code { color: var(--accent-cyan); font-size: 13px; font-weight: bold; font-family: monospace; }
+  .creator-card {
+    background: #091424;
+    border: 1px solid var(--card-border);
+    padding: 14px 20px;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 16px;
+    font-size: 13px;
+  }
+  .creator-card strong { color: #ffffff; font-weight: 700; }
+  .creator-card code {
+    color: var(--accent-cyan);
+    background: #040912;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 12px;
+  }
 
-/* Accordion Section */
-.interactive-section { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
-.accordion-btn {
-  background: linear-gradient(90deg, #0b223f, #071526);
-  border: 1px solid #1f3a5f;
-  border-right: 4px solid var(--accent-cyan);
-  color: #f1f5f9;
-  padding: 14px 18px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  text-align: right;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: all 0.25s ease;
-  width: 100%;
-}
-.accordion-btn:hover {
-  background: linear-gradient(90deg, #13335a, #0b223f);
-  border-right-color: var(--accent-green);
-  transform: translateX(-3px);
-}
-.accordion-content {
-  display:px; }
-.legal-box p { margin-bottom: 10px; }
+  /* 5 Interactive Accordion Buttons */
+  .accordion-wrap { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
+  .acc-btn {
+    background: linear-gradient(90deg, #0e223d, #091729);
+    border: 1px solid #1d3b66;
+    border-right: 4px solid var(--accent-cyan);
+    color: #ffffff;
+    padding: 14px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: right;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.25s ease;
+    width: 100%;
+  }
+  .acc-btn:hover {
+    background: linear-gradient(90deg, #153259, #0c203a);
+    border-right-color: var(--accent-green);
+    transform: translateX(-4px);
+  }
+  .acc-btn.active {
+    border-right-color: var(--accent-amber);
+    background: #112644;
+  }
+  .acc-content {
+    display: none;
+    background: #071220;
+    border: 1px solid #183358;
+    border-top: none;
+    padding: 18px 22px;
+    border-radius: 0 0 8px 8px;
+    font-size: 12.5px;
+    color: #cad8e8;
+    line-height: 1.9;
+  }
+  .acc-content h4 { color: var(--accent-cyan); font-size: 13.5px; margin: 12px 0 6px 0; }
+  .acc-content h4:first-child { margin-top: 0; }
+  .acc-content p { margin-bottom: 8px; }
+  .acc-content ul, .acc-content ol { padding-right: 22px; margin-bottom: 10px; }
+  .acc-content li { margin-bottom: 4px; }
+  .acc-content strong { color: #ffffff; }
+</style>
+</head>
+<body>
 
-.footer-card { background: #05101f; border: 1px solid var(--border-ui); padding: 15px 20px; border-radius: 6px; text-align: center; margin-bottom: 15px; }
-.footer-card code { color: var(--accent-cyan); font-size: 13px; font-weight: bold; font-family: monospace; }
+<!-- Header -->
+<div class="header">
+  <h1><span>⚡ Fuel-Tracking-AI</span> | سامانه هوشمند پایش و دیسپاچینگ زنجیره سوخت</h1>
+  <div class="badge-status">● پایدار / سنسورهای فدرال فعال</div>
+</div>
 
-/* Accordion Section */
-.interactive-section { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
-.accordion-btn {
-  background: linear-gradient(90deg, #0b223f, #071526);
-  border: 1px solid #1f3a5f;
-  border-right: 4px solid var(--accent-cyan);
-  color: #f1f5f9;
-  padding: 14px 18px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  text-align: right;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: all 0.25s ease;
-  width: 100%;
-}
-.accordion-btn:hover {
-  background: linear-gradient(90deg, #13335a, #0b223f);
-  border-right-color: var(--accent-green);
-  transform: translateX(-3px);
-}
-.accordion-content {
-  display: none;
-  background: #051121;
-  border: 1px solid #1f3a5f;
-  border-top: none;
-  padding: 16px 20px;
-  border-radius: 0 0 8px 8px;
-  font-size: 1flow-rate">۱۱۴٫۲ میلیون لیتر/روز</strong>
+<!-- Grid -->
+<div class="grid">
+  <!-- Status Panel -->
+  <div class="panel">
+    <div class="panel-title">تله‌متری هیدرولیک و خطوط لوله سراسری</div>
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <span class="label">نرخ لحظه‌ای انتقال سوخت:</span>
+        <div class="value">۱۱۴٫۲ میلیون لیتر/روز</div>
       </div>
-      <div class="metric-box">
-        <span>موجودی فعال انبارهای نفت:</span>
-        <strong>۸۷٫۴٪ ظرفیت ایمن</strong>
+      <div class="metric-card">
+        <span class="label">موجودی فعال انبارهای نفت:</span>
+        <div class="value">۸۷٫۴٪ ظرفیت ایمن</div>
       </div>
-      <div class="metric-box">
-        <span>انحراف محاسباتی دیسپچرینگ:</span>
-        <strong style="color: var(--accent-green);">۰٫۰۴٪ (محدوده مجاز)</strong>
+      <div class="metric-card">
+        <span class="label">انحراف محاسباتی دیسپاچینگ:</span>
+        <div class="value" style="color: var(--accent-green);">۰٫۰۴٪ (محدوده استاندارد)</div>
       </div>
-      <div class="metric-box">
-        <span>سنسورهای لبه نازل و تانکر:</span>
-        <strong style="color: var(--accent-cyan);">اتصال امن فدرال</strong>
+      <div class="metric-card">
+        <span class="label">شبکه لبه نازل‌ها و تانکرها:</span>
+        <div class="value" style="color: var(--accent-cyan);">پروتکل ایمن لبه فعال</div>
       </div>
     </div>
-    <button class="btn" onclick="triggerAction('MASS_BALANCE')">📊 تطبیق بلادرنگ موازنه جرمی و دبی‌سنج‌های کوریولیس</button>
-    <button class="btn" onclick="triggerAction('ANOMALY')">🔍 اجرای الگوریتم ANFIS جهت شناسایی مغایرت و قاچاق خطی</button>
-    <button class="btn btn-danger" onclick="triggerAction('ISOLATE')">🚨 ایزولاسیون هوشمند شیرهای اطمینان و انسداد مسیر مشکوک</button>
+    <div class="action-buttons">
+      <button class="btn-action" onclick="runSim('MASS_BALANCE')">📊 تطبیق بلادرنگ موازنه جرمی و دبی‌سنج‌های کوریولیس</button>
+      <button class="btn-action" onclick="runSim('ANOMALY')">🔍 اجرای الگوریتم ANFIS جهت کشف مغایرت و قاچاق خطی</button>
+      <button class="btn-action btn-danger" onclick="runSim('ISOLATE')">🚨 ایزولاسیون هوشمند شیرهای اضطراری و انسداد مسیر مشکوک</button>
+    </div>
   </div>
 
-  <!-- لاگ فرامین و خروجی HIL -->
-  <div class="card">
-    <div class="card-title">ترمینال هوش لبه فدرال و پایش ناهنجاری (ANFIS)</div>
-    <div class="console" id="console-log">
-      [سیستم] اتصال بی‌درنگ لایه فیزیکی به سنسورهای دبی‌سنجی کوریولیس برقرار است.<br>
-      [سیستم] ۹۹٫۱٪ همبستگی داده‌های پالایشگاهی و مصرف نهایی ثبت شد.<br>
-      [دیسپچرینگ] تله‌متری مخازن بارگیری ری و اصفهان در وضعیت نرمال.<br>
-      [آماده‌باش] پایگاه قواعد فازی آماده پردازش جریان داده‌های مکانی تانکرها و کارت‌های سوخت.
+  <!-- Terminal Log -->
+  <div class="panel">
+    <div class="panel-title">ترمینال هوش لبه فدرال و پایش ناهنجاری (ANFIS)</div>
+    <div class="console-box" id="console">
+      [00:00:01] اتصال بی‌درنگ لایه فیزیکی به سنسورهای دبی‌سنجی کوریولیس برقرار است.<br>
+      [00:00:02] ضریب همبستگی داده‌های پالایشگاه با دیسپاچینگ: ۹۹٫۱٪.<br>
+      [00:00:03] تله‌متری مخازن بارگیری ری و اصفهان در وضعیت نرمال ثبت شد.<br>
+      [00:00:04] پایگاه قواعد فازی آماده پردازش جریان داده‌های مکانی تانکرها و کارت‌های سوخت.
     </div>
   </div>
 </div>
 
-<!-- کادر اخطار رسمی ممانعت از کپی‌برداری -->
+<!-- Notice -->
 <div class="legal-box">
   <h3>اخطار رسمی ممانعت از کپی‌برداری و پیاده‌سازی عملیاتی:</h3>
   <p>هر زمان پل واقعی Simulink/HIL سنسورهای لبه هوش مصنوعی فدرال متصل شود، سیستم آماده دریافت اطلاعات زنده خواهد بود.</p>
@@ -162,21 +253,21 @@ body { background-color: var(--bg-main); color: var(--text-light); font-size: 13
   <p>در صورت سفارش، این سامانه به شکلی اختصاصی بازطراحی و تحویل خواهد شد که با اتصال بی‌واسطه به لبه‌های واقعی سخت‌افزاری (Hardware-in-the-Loop - HIL)، پایگاه استنتاج فازی ANFIS و بلوک‌های مدل‌سازی‌شده در Simulink، پایدارترین پاسخ دینامیکی، هدایتی و بهینه را در شرایط عملیاتی فراهم آورد.</p>
 </div>
 
-<!-- شناسنامه طراح بدون سال ۱۳۹۵ -->
-<div class="footer-card">
+<!-- Author ID -->
+<div class="creator-card">
   طراحی و توسعه مهندسی: <strong>حسین لعلیان؛ رتبه ۳۲ کنکور دکتری</strong><br>
   رایانامه رسمی ارتباطات صنعتی: <code>ai.algorithms.ballistics@gmail.com</code>
 </div>
 
-<!-- بخش ۵ دکمه اختصاصی زنجیره سوخت -->
-<div class="interactive-section">
+<!-- 5 Fuel Buttons -->
+<div class="accordion-wrap">
 
   <!-- دکمه ۱ -->
-  <button class="accordion-btn" onclick="toggleAccordion(this)">
+  <button class="acc-btn" onclick="toggleAcc(this)">
     <span>🔘 دکمه ۱: این دکمه را بفشار تا متصل شوی به طرح توجیهی عملیاتی این پلتفرم!</span>
-    <span class="btn-icon">◀</span>
+    <span>◀</span>
   </button>
-  <div class="accordion-content">
+  <div class="acc-content">
     <h4>مهار فوری هدررفت ملی، انحراف فرآورده و مدیریت هوشمند موازنه سوخت</h4>
     <p><strong>معرفی سامانه فرماندهی و مانیتورینگ جامع زنجیره سوخت کشور (Fuel-Tracking-AI):</strong></p>
     <p>زنجیره تامین، انتقال و توزیع سوخت کشور با دو چالش و هدررفت عظیم مالی و حاکمیتی روبروست:</p>
@@ -193,11 +284,11 @@ body { background-color: var(--bg-main); color: var(--text-light); font-size: 13
   </div>
 
   <!-- دکمه ۲ -->
-  <button class="accordion-btn" onclick="toggleAccordion(this)">
+  <button class="acc-btn" onclick="toggleAcc(this)">
     <span>🔘 دکمه ۲: این دکمه را بفشار تا متصل شوی به مکانیزم کاری و ارزش پیشنهادی!</span>
-    <span class="btn-icon">◀</span>
+    <span>◀</span>
   </button>
-  <div class="accordion-content">
+  <div class="acc-content">
     <p><strong>مسئله مبرم بخش انرژی کشور:</strong> هدررفت روزانه ده‌ها میلیون لیتر سوخت یارانه‌ای، قاچاق سازمان‌یافته مرزی، دستکاری تلمبه‌ها و عدم شفافیت در زنجیره انبار تا باک.</p>
     <h4>راهکار سامانه Fuel-Tracking-AI:</h4>
     <ul>
@@ -209,11 +300,11 @@ body { background-color: var(--bg-main); color: var(--text-light); font-size: 13
   </div>
 
   <!-- دکمه ۳ -->
-  <button class="accordion-btn" onclick="toggleAccordion(this)">
+  <button class="acc-btn" onclick="toggleAcc(this)">
     <span>🔘 دکمه ۳: این دکمه را بفشار تا متصل شوی به مسیر عملیاتی این پنل!</span>
-    <span class="btn-icon">◀</span>
+    <span>◀</span>
   </button>
-  <div class="accordion-content">
+  <div class="acc-content">
     <ul>
       <li><strong>دیده‌بانی چندمنظوره جریان هیدرولیکی:</strong> سامانه در هر لحظه دبی حجمی، چگالی استاندارد در ۱۵ درجه سانتی‌گراد، فشار خط و موجودی فعال مخازن را تحلیل می‌کند.</li>
       <li><strong>الگوریتم پایش پیوسته کسری:</strong> در صورت بروز کمترین افت غیرعادی جریان بین مبدا و مقصد، الگوریتم بلافاصله موقعیت احتمالی افت فشار یا انشعاب غیرمجاز را تخمین می‌زند.</li>
@@ -223,11 +314,11 @@ body { background-color: var(--bg-main); color: var(--text-light); font-size: 13
   </div>
 
   <!-- دکمه ۴ -->
-  <button class="accordion-btn" onclick="toggleAccordion(this)">
+  <button class="acc-btn" onclick="toggleAcc(this)">
     <span>🔘 دکمه ۴: این دکمه را بفشار تا متصل شوی به نکات کلیدی قرارداد!</span>
-    <span class="btn-icon">◀</span>
+    <span>◀</span>
   </button>
-  <div class="accordion-content">
+  <div class="acc-content">
     <ol>
       <li><strong>محدوده مسئولیت (Disclaimer):</strong> عملکرد هسته تحلیلی منوط به صحت دیتای مخابره‌شده از فلومترها، تله‌متری تلمبه‌ها و پلمب‌های هوشمند است؛ عیوب مکانیکی فیزیکی ادوات و خرابی ادوات خطی خارج از حیطه نرم‌افزار تحلیلی است.</li>
       <li><strong>محرمانگی و امنیت سایبری داده‌ها (NDA):</strong> آمار تولید، ترافیک ناوگان حمل سوخت، ظرفیت انبارهای راهبردی و مسیرهای لوله به عنوان داده‌های حیاتی زیرساختی تحت پروتکل‌های امنیتی چندلایه‌ای کدگذاری و ایزوله می‌شوند.</li>
@@ -236,11 +327,11 @@ body { background-color: var(--bg-main); color: var(--text-light); font-size: 13
   </div>
 
   <!-- دکمه ۵ -->
-  <button class="accordion-btn" onclick="toggleAccordion(this)">
+  <button class="acc-btn" onclick="toggleAcc(this)">
     <span>🔘 دکمه ۵: بفشار این دکمه را تا متصل شوی به مدل‌های پیشنهادی ما!</span>
-    <span class="btn-icon">◀</span>
+    <span>◀</span>
   </button>
-  <div class="accordion-content">
+  <div class="acc-content">
     <h4>مدل اول: قرارداد تسهیم صرفه‌جویی و مهار قاچاق سوخت (Shared Savings / Recovery Based)</h4>
     <p>استقرار پلتفرم پایش هوشمند در منطقه پایلوت بدون تحمیل بودجه سنگین اولیه؛ درصدی توافقی از ارزش ریالی سوختِ بازیابی‌شده از مهار کسری‌های غیرمجاز و جلوگیری از قاچاق سازمان‌یافته، طبق داده‌های موازنه، به عنوان حق‌الزحمه پروژه محاسبه و پرداخت می‌شود.</p>
     
@@ -251,30 +342,34 @@ body { background-color: var(--bg-main); color: var(--text-light); font-size: 13
 </div>
 
 <script>
-function triggerAction(type) {
-  const log = document.getElementById('console-log');
-  const item = document.createElement('div');
+function runSim(type) {
+  const c = document.getElementById('console');
+  const line = document.createElement('div');
   const now = new Date().toLocaleTimeString('fa-IR');
-  
+
   if(type === 'MASS_BALANCE') {
-    item.innerHTML = `[${now}] <span style="color:#00ff88;">[موازنه جرمی]</span> داده‌های خروجی با دبی‌سنج‌های کوریولیس تطبیق داده شد؛ انحراف در بازه مجاز (۰٫۰۲٪).`;
+    line.innerHTML = `[${now}] <span style="color:#00e676;">[موازنه جرمی]</span> دبی‌سنج‌های کوریولیس تطبیق داده شد؛ انحراف در محدوده مجاز (۰٫۰۲٪).`;
   } else if(type === 'ANOMALY') {
-    item.innerHTML = `[${now}] <span style="color:#ffbe0b;">[الگوریتم ANFIS]</span> اسکن ناهنجاری پایان یافت؛ الگوی مشکوک در مسیر لوله ناحیه مرزی کشف نشد.`;
+    line.innerHTML = `[${now}] <span style="color:#ffb300;">[مدل ANFIS]</span> اسکن ناهنجاری کامل شد؛ هیچ انشعاب غیرمجازی در خط لوله شناسایی نشد.`;
   } else if(type === 'ISOLATE') {
-    item.innerHTML = `[${now}] <span style="color:#ff3366;">[ایزولاسیون]</span> سیگنال آماده‌باش به شیرهای خودکار (ESDV) و سامانه‌های لبه نازل صادر شد.`;
+    line.innerHTML = `[${now}] <span style="color:#ff3366;">[ایزولاسیون]</span> سیگنال قطع اضطراری به شیرهای ESDV و لبه نازل صادر شد.`;
   }
-  
-  log.appendChild(item);
-  log.scrollTop = log.scrollHeight;
+
+  c.appendChild(line);
+  c.scrollTop = c.scrollHeight;
 }
 
-function toggleAccordion(btn) {
-  btn.classList.toggle("active");
-  const content = btn.nextElementSibling;
-  if (content.style.display === "block") {
-    content.style.display = "none";
+function toggleAcc(el) {
+  el.classList.toggle('active');
+  const body = el.nextElementSibling;
+  const arrow = el.querySelector('span:last-child');
+  
+  if (body.style.display === 'block') {
+    body.style.display = 'none';
+    arrow.textContent = '◀';
   } else {
-    content.style.display = "block";
+    body.style.display = 'block';
+    arrow.textContent = '▼';
   }
 }
 </script>
